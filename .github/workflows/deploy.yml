@@ -1,0 +1,25 @@
+name: Deploy to VM
+
+on:
+  push:
+    branches:
+      - main  # Or any branch you want to trigger the deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to VM
+      run: |
+        ssh asureuser@20.64.226.31 'bash -s' < ./deploy_script.sh
+      env:
+        SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
