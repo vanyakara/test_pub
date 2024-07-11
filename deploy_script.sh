@@ -7,4 +7,5 @@ cd ~/test/test_pub
 sudo git pull origin main
 else
 sudo git clone git@github.com:vanyakara/test_pub.git
+fi
 # Add any additional deployment commands here, such as restarting services
